@@ -1,9 +1,44 @@
-= warden-openid
+= Warden OpenID Strategy
 
-Description goes here.
+== Install
+
+ $ gem install warden-openid
+
+== How to use
+
+=== 1. Configure Warden uses OpenID Strategy
+
+ require 'warden-openid'
+
+ use Rack::OpenID
+ use Warden::Manager do |manager|
+   manager.default_strategies :openid
+   manager.failure_app = FailureApp
+ end
+
+=== 2. Setup user finder
+
+ Warden::OpenID.user_finder do |response|
+   User.find_by_identity_url(response.identity_url)
+ end
+
+response is an instance of OpenID::Consumer::Response.
+
+=== 3. Enjoy!
+
+Please refer to examples directory for details.
+
+== Caveats
+
+If you use this with Rails, please don't use OpenID::Store::Memory. A problem occurs by class reloading in the development mode.
+
+For example, OpenID::Store::Filesystem is used instead:
+
+ require 'openid/store/filesystem'
+ Rails.configuration.middleware.use Rack::OpenID, OpenID::Store::Filesystem.new(Rails.root + 'tmp/openid')
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
