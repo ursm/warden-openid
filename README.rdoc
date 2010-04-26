@@ -4,12 +4,13 @@
 
  $ gem install warden-openid
 
-== How to use
+== Usage
 
-=== 1. Configure Warden uses OpenID Strategy
+=== 1. Configure Warden uses OpenID strategy
 
  require 'warden-openid'
 
+ use Rack::Session
  use Rack::OpenID
  use Warden::Manager do |manager|
    manager.default_strategies :openid
@@ -22,17 +23,29 @@
    User.find_by_identity_url(response.identity_url)
  end
 
-response is an instance of OpenID::Consumer::Response.
+_response_ is an instance of <tt>OpenID::Consumer::Response</tt>.
 
-=== 3. Enjoy!
+=== 3. Create action and view
 
-Please refer to examples directory for details.
+Example by Sinatra and Haml:
+
+ post '/signin' do
+   authenticate!
+ end
+
+ %form(action='/signin' method='post')
+   %input(type='text' name='openid_identifier')
+   %input(type='submit' value='Sign in')
+
+This strategy starts with _openid_identifier_ parameter.
+
+You may need to customize <tt>/unauthenticated</tt> action. Please refer to examples directory for details.
 
 == Caveats
 
-If you use this with Rails, please don't use OpenID::Store::Memory. A problem occurs by class reloading in the development mode.
+If you use this with Rails, please don't use <tt>OpenID::Store::Memory</tt>. A problem occurs by class reloading in the development mode.
 
-For example, OpenID::Store::Filesystem is used instead:
+For example, <tt>OpenID::Store::Filesystem</tt> is used instead:
 
  require 'openid/store/filesystem'
  Rails.configuration.middleware.use Rack::OpenID, OpenID::Store::Filesystem.new(Rails.root + 'tmp/openid')
