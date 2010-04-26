@@ -1,0 +1,38 @@
+--- 
+dependencies: 
+  haml: 
+    group: 
+    - :default
+    version: ">= 0"
+  rack-flash: 
+    group: 
+    - :default
+    version: ">= 0"
+  warden-openid: 
+    group: 
+    - :default
+    version: ">= 0"
+  sinatra: 
+    group: 
+    - :default
+    version: ">= 0"
+specs: 
+- haml: 
+    version: 2.2.23
+- rack: 
+    version: 1.1.0
+- rack-flash: 
+    version: 0.1.1
+- ruby-openid: 
+    version: 2.1.7
+- rack-openid: 
+    version: 1.0.3
+- sinatra: 
+    version: "1.0"
+- warden: 
+    version: 0.10.3
+- warden-openid: 
+    version: 0.0.1
+hash: be52a688f6c0d9677936c0c4f9ee9f741486c315
+sources: []
+
