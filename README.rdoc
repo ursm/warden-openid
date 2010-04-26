@@ -10,7 +10,7 @@
 
  require 'warden-openid'
 
- use Rack::Session
+ use Rack::Session::Cookie
  use Rack::OpenID
  use Warden::Manager do |manager|
    manager.default_strategies :openid
@@ -25,7 +25,7 @@
 
 _response_ is an instance of <tt>OpenID::Consumer::Response</tt>.
 
-=== 3. Create action and view
+=== 3. Create route and view
 
 Example by Sinatra and Haml:
 
@@ -39,7 +39,7 @@ Example by Sinatra and Haml:
 
 This strategy starts with _openid_identifier_ parameter.
 
-You may need to customize <tt>/unauthenticated</tt> action. Please refer to examples directory for details.
+You may need to customize <tt>/unauthenticated</tt> route. Please refer to examples directory for details.
 
 == Caveats
 
