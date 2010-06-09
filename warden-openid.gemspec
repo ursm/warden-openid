@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{warden-openid}
-  s.version = "0.0.1"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Keita Urashima"]
@@ -33,7 +33,8 @@ Gem::Specification.new do |s|
      "lib/warden/openid.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb",
-     "spec/warden-openid_spec.rb"
+     "spec/warden-openid_spec.rb",
+     "warden-openid.gemspec"
   ]
   s.homepage = %q{http://github.com/ursm/warden-openid}
   s.rdoc_options = ["--charset=UTF-8"]
