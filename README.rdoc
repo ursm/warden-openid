@@ -19,8 +19,10 @@
 
 === 2. Setup user finder
 
- Warden::OpenID.user_finder do |response|
-   User.find_by_identity_url(response.identity_url)
+ Warden::OpenID.configure do |config|
+   config.user_finder do |response|
+     User.find_by_identity_url(response.identity_url)
+   end
  end
 
 _response_ is an instance of <tt>OpenID::Consumer::Response</tt>.
@@ -41,6 +43,19 @@ This strategy starts with _openid_identifier_ parameter.
 
 You may need to customize <tt>/unauthenticated</tt> route. Please refer to examples directory for details.
 
+== Fetch additional fields from server
+
+ Warden::OpenID.configure do |config|
+   config.required_fields = 'email'
+   config.optional_fields = %w(nickname fullname)
+
+   config.user_finder do |response|
+     fields = OpenID::SReg::Response.from_success_response(response)
+     p fields['email']
+     p fields['nickname']
+   end
+ end
+
 == Caveats
 
 If you use this with Rails, please don't use <tt>OpenID::Store::Memory</tt>. A problem occurs by class reloading in the development mode.
@@ -49,6 +64,10 @@ For example, <tt>OpenID::Store::Filesystem</tt> is used instead:
 
  require 'openid/store/filesystem'
  Rails.configuration.middleware.use Rack::OpenID, OpenID::Store::Filesystem.new(Rails.root + 'tmp/openid')
+
+== Contributors
+
+* Philip H. MacIver
 
 == Note on Patches/Pull Requests
 

@@ -5,8 +5,10 @@ Bundler.require :default
 
 users = {}
 
-Warden::OpenID.user_finder do |response|
-  users[response.identity_url]
+Warden::OpenID.configure do |config|
+  config.user_finder do |response|
+    users[response.identity_url]
+  end
 end
 
 helpers do

@@ -18,7 +18,7 @@ dependencies:
     version: ">= 0"
 specs: 
 - haml: 
-    version: 2.2.23
+    version: 3.0.10
 - rack: 
     version: 1.1.0
 - rack-flash: 
@@ -30,9 +30,10 @@ specs:
 - sinatra: 
     version: "1.0"
 - warden: 
-    version: 0.10.3
+    version: 0.10.7
 - warden-openid: 
     version: 0.0.1
-hash: be52a688f6c0d9677936c0c4f9ee9f741486c315
-sources: []
-
+hash: a1205587e00609d6a930be402bdd2afbd252e0c0
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org
